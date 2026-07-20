@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>服役经历登记详情 · 数字迎新</title>
+<link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+<link rel="stylesheet" href="../assets/layout.css" />
+<link rel="stylesheet" href="../assets/admin.css" />
+</head>
+<body>
+<div class="yx-app">
+  <header class="yx-topnav">
+    <div class="brand"><span class="logo">中</span>中南大学数字迎新</div>
+    <nav class="nav-links">
+      <a href="#">首页</a>
+      <a href="#">审批事项</a>
+      <a href="#">迎新准备</a>
+      <a class="active" href="status.html">迎新环节管理</a>
+      <a href="#">系统基础配置</a>
+      <a href="#">迎新统计查询</a>
+      <a href="#">迎新大屏</a>
+    </nav>
+    <div class="right">
+      <span class="bell"><i class="hgi-stroke hgi-notification-01"></i><span class="badge">2</span></span>
+      <span>管理员</span>
+    </div>
+  </header>
+  <div class="yx-body">
+    <aside class="yx-sidebar">
+      <div class="search"><input type="text" placeholder="菜单搜索..." /></div>
+      <nav class="nav">
+        <a class="nav-item" href="status.html"><i class="hgi-stroke hgi-task-01"></i>环节办理情况</a>
+        <div class="group">新生信息采集</div>
+        <a class="nav-item" href="talent-list.html"><i class="hgi-stroke hgi-music-note-01"></i>特长信息</a>
+        <a class="nav-item active" href="service-list.html"><i class="hgi-stroke hgi-shield-01"></i>服役经历登记</a>
+        <a class="nav-item" href="talent-stats.html"><i class="hgi-stroke hgi-pie-chart"></i>特长信息统计</a>
+      </nav>
+      <div class="foot"><a href="../index.html"><i class="hgi-stroke hgi-arrow-left-02"></i> 返回原型导航</a></div>
+    </aside>
+    <div class="yx-main">
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <h1>服役经历登记 · 详情</h1>
+            <p class="desc">查看学生服役信息与证明材料</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn-ghost" href="service-list.html"><i class="hgi-stroke hgi-arrow-left-02"></i> 返回列表</a>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-section">
+            <div class="form-section-title">基本信息</div>
+            <div class="detail-profile">
+              <div class="photo"><i class="hgi-stroke hgi-user"></i></div>
+              <div class="meta" style="flex:1">
+                <h2 id="stuName">刘强 <span class="tag tag-ok" style="vertical-align:middle;margin-left:8px">已办理</span></h2>
+                <div class="detail-grid">
+                  <div class="detail-item"><div class="label">学号</div><div class="value" id="stuId">2026010567</div></div>
+                  <div class="detail-item"><div class="label">性别</div><div class="value">男</div></div>
+                  <div class="detail-item"><div class="label">培养层次</div><div class="value">本科</div></div>
+                  <div class="detail-item"><div class="label">所在院系</div><div class="value">商学院</div></div>
+                  <div class="detail-item"><div class="label">专业</div><div class="value">工商管理</div></div>
+                  <div class="detail-item"><div class="label">班级</div><div class="value">工管2601</div></div>
+                  <div class="detail-item"><div class="label">辅导员</div><div class="value">赵老师</div></div>
+                  <div class="detail-item"><div class="label">提交时间</div><div class="value">2026-07-16 09:18:42</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section" id="serviceSection">
+            <div class="form-section-title">服役信息</div>
+            <div class="detail-grid">
+              <div class="detail-item"><div class="label">是否服役</div><div class="value"><span class="tag" style="background:#FCE8EA;color:#DF2027">是</span></div></div>
+              <div class="detail-item"><div class="label">服役开始时间</div><div class="value">2022-09-01</div></div>
+              <div class="detail-item"><div class="label">服役结束时间</div><div class="value">2024-09-01</div></div>
+              <div class="detail-item"><div class="label">兵种</div><div class="value">陆军</div></div>
+              <div class="detail-item"><div class="label">服役部队/单位</div><div class="value">某集团军某旅</div></div>
+              <div class="detail-item"><div class="label">军衔</div><div class="value">下士</div></div>
+              <div class="detail-item span-3"><div class="label">立功受奖情况</div><div class="value">获部队嘉奖 1 次</div></div>
+            </div>
+          </div>
+
+          <div class="form-section" id="filesSection">
+            <div class="form-section-title">证明材料</div>
+            <div class="file-thumbs">
+              <div class="ft"><i class="hgi-stroke hgi-image-01"></i>退役证正面</div>
+              <div class="ft"><i class="hgi-stroke hgi-image-01"></i>退役证背面</div>
+              <div class="ft"><i class="hgi-stroke hgi-file-01"></i>证明材料.pdf</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  if (params.get('id') !== 'served') {
+    document.getElementById('stuName').innerHTML = '张三 <span class="tag tag-ok" style="vertical-align:middle;margin-left:8px">已办理</span>';
+    document.getElementById('stuId').textContent = '2026010123';
+    document.getElementById('serviceSection').innerHTML =
+      '<div class="form-section-title">服役信息</div>' +
+      '<div class="detail-grid">' +
+      '<div class="detail-item"><div class="label">是否服役</div><div class="value">否</div></div>' +
+      '<div class="detail-item span-3"><div class="label">说明</div><div class="value" style="color:var(--text-3)">学生确认无服役经历，无需填写后续字段。</div></div>' +
+      '</div>';
+    document.getElementById('filesSection').style.display = 'none';
+  }
+})();
+</script>
+</body>
+</html>

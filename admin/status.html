@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>环节办理情况 · 数字迎新</title>
+<link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+<link rel="stylesheet" href="../assets/layout.css" />
+<link rel="stylesheet" href="../assets/admin.css" />
+</head>
+<body>
+<div class="yx-app">
+  <header class="yx-topnav">
+    <div class="brand"><span class="logo">中</span>中南大学数字迎新</div>
+    <nav class="nav-links">
+      <a href="#">首页</a>
+      <a href="#">审批事项</a>
+      <a href="#">迎新准备</a>
+      <a class="active" href="status.html">迎新环节管理</a>
+      <a href="#">系统基础配置</a>
+      <a href="#">迎新统计查询</a>
+      <a href="#">迎新大屏</a>
+    </nav>
+    <div class="right">
+      <span class="bell"><i class="hgi-stroke hgi-notification-01"></i><span class="badge">2</span></span>
+      <span>管理员</span>
+    </div>
+  </header>
+  <div class="yx-body">
+    <aside class="yx-sidebar">
+      <div class="search"><input type="text" placeholder="菜单搜索..." /></div>
+      <nav class="nav">
+        <a class="nav-item active" href="status.html"><i class="hgi-stroke hgi-task-01"></i>环节办理情况</a>
+        <div class="group">新生信息采集</div>
+        <a class="nav-item" href="talent-list.html"><i class="hgi-stroke hgi-music-note-01"></i>特长信息</a>
+        <a class="nav-item" href="service-list.html"><i class="hgi-stroke hgi-shield-01"></i>服役经历登记</a>
+        <a class="nav-item" href="talent-stats.html"><i class="hgi-stroke hgi-pie-chart"></i>特长信息统计</a>
+      </nav>
+      <div class="foot"><a href="../index.html"><i class="hgi-stroke hgi-arrow-left-02"></i> 返回原型导航</a></div>
+    </aside>
+    <div class="yx-main">
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <h1>迎新办理情况</h1>
+            <p class="desc">汇总各迎新环节办理状态；已新增「特长信息」「服役经历登记」两列</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-secondary" onclick="alert('原型：导出')"><i class="hgi-stroke hgi-download-01"></i> 导出</button>
+            <button type="button" class="btn btn-primary" onclick="alert('原型：信息提醒')"><i class="hgi-stroke hgi-mail-01"></i> 信息提醒</button>
+          </div>
+        </div>
+
+        <div class="filter-card">
+          <div class="filter-grid">
+            <div class="filter-item"><label>院系</label>
+              <select><option value="">全部院系</option><option>计算机学院</option><option>外国语学院</option><option>商学院</option></select>
+            </div>
+            <div class="filter-item"><label>培养层次</label>
+              <select><option value="">全部</option><option>本科</option><option>研究生</option></select>
+            </div>
+            <div class="filter-item"><label>批次</label>
+              <select><option>2026 本科新生</option></select>
+            </div>
+            <div class="filter-item"><label>姓名 / 学号</label>
+              <input type="text" placeholder="请输入姓名或学号" />
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" class="btn btn-primary btn-sm"><i class="hgi-stroke hgi-search-01"></i> 立即搜索</button>
+            <button type="button" class="btn btn-ghost btn-sm">重置</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="left"><span class="text-muted">共 <strong>5</strong> 条（原型示例） · 红点未办理 / 绿点已办理</span></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>姓名</th><th>学号</th><th>培养层次</th><th>所在院系</th><th>专业</th><th>班级</th><th>辅导员</th>
+                  <th>基本信息采集</th>
+                  <th>银行卡信息登记</th>
+                  <th>军训服登记</th>
+                  <th style="background:#D6EAF9">特长信息</th>
+                  <th style="background:#D6EAF9">服役经历登记</th>
+                  <th>选择宿舍</th>
+                  <th class="col-actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="avatar-cell"><span class="av">张</span>张三</div></td>
+                  <td>2026010123</td><td>本科</td><td>计算机学院</td><td>软件工程</td><td>软工2601</td><td>李老师</td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td class="col-actions"><a class="btn-link" href="talent-detail.html">查看</a></td>
+                </tr>
+                <tr>
+                  <td><div class="avatar-cell"><span class="av">李</span>李四</div></td>
+                  <td>2026010456</td><td>本科</td><td>外国语学院</td><td>英语</td><td>英语2602</td><td>王老师</td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td class="col-actions"><a class="btn-link" href="talent-detail.html">查看</a></td>
+                </tr>
+                <tr>
+                  <td><div class="avatar-cell"><span class="av">刘</span>刘强</div></td>
+                  <td>2026010567</td><td>本科</td><td>商学院</td><td>工商管理</td><td>工管2601</td><td>赵老师</td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td class="col-actions"><a class="btn-link" href="service-detail.html?id=served">查看</a></td>
+                </tr>
+                <tr>
+                  <td><div class="avatar-cell"><span class="av">赵</span>赵六</div></td>
+                  <td>2026011012</td><td>本科</td><td>计算机学院</td><td>计算机科学与技术</td><td>计科2603</td><td>李老师</td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td><span class="status-dot todo">未办理</span></td>
+                  <td class="col-actions"><a class="btn-link" href="#">查看</a></td>
+                </tr>
+                <tr>
+                  <td><div class="avatar-cell"><span class="av">陈</span>陈七</div></td>
+                  <td>2026011345</td><td>研究生</td><td>湘雅医学院</td><td>临床医学</td><td>临医研2601</td><td>孙老师</td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td><span class="status-dot done">已办理</span></td>
+                  <td class="col-actions"><a class="btn-link" href="talent-detail.html">查看</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span>共 5 条（原型示例数据）· 高亮列为本次新增环节</span>
+            <div class="pagination">
+              <button type="button">&lt;</button>
+              <button type="button" class="active">1</button>
+              <button type="button">&gt;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

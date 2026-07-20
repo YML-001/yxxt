@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>迎新系统补充需求 · 原型导航</title>
+<link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+<link rel="stylesheet" href="assets/layout.css" />
+<style>
+.hero{background:#fff;border-bottom:1px solid var(--primary-light);padding:48px 24px 36px;text-align:center}
+.hero-icon{width:64px;height:64px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:16px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:28px;margin-bottom:18px;box-shadow:0 4px 16px rgba(48,135,204,.25)}
+.hero h1{font-size:26px;font-weight:800;margin-bottom:8px}
+.hero p{font-size:14px;color:var(--text-2);max-width:760px;margin:0 auto 20px;line-height:1.7}
+.hero-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:13px;background:var(--primary-light);color:var(--primary)}
+.container{max-width:1140px;margin:0 auto;padding:32px 24px 48px}
+.section-title{font-size:18px;font-weight:700;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.module-card{background:#fff;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;transition:all .2s}
+.module-card:hover{border-color:var(--primary);box-shadow:var(--shadow-lg)}
+.module-head{padding:20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border-light)}
+.module-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff}
+.mi-1{background:linear-gradient(135deg,#3087CC,#006DAD)}
+.mi-2{background:linear-gradient(135deg,#C62828,#E53935)}
+.mi-3{background:linear-gradient(135deg,#1BB975,#0E9A6A)}
+.mi-4{background:linear-gradient(135deg,#F29100,#D97706)}
+.module-head h3{font-size:16px;font-weight:700}
+.module-head p{font-size:12px;color:var(--text-3);margin-top:2px}
+.module-links{padding:14px 16px 18px;display:flex;flex-direction:column;gap:6px}
+.module-links a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:13px;color:var(--text-2);background:var(--bg)}
+.module-links a:hover{background:var(--primary-light);color:var(--primary)}
+.module-links a i{color:var(--primary);font-size:14px}
+.feature-box{background:#fff;border:1px solid var(--border-light);border-radius:var(--radius-md);padding:20px 24px;margin-bottom:24px}
+.feature-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 20px;list-style:none}
+.feature-list li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text-2)}
+.feature-list li i{color:var(--success);margin-top:2px}
+@media(max-width:900px){.module-grid,.feature-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-icon"><i class="hgi-stroke hgi-student-card"></i></div>
+  <h1>迎新系统补充需求 · 原型导航</h1>
+  <p>学生端新增「特长信息采集」「服役经历登记」两个迎新环节；数字迎新后台新增对应菜单（列表 / 详情 / 导出 / 统计），并在「环节办理情况」增加两列办理状态。</p>
+  <div class="hero-badges">
+    <span class="hero-badge"><i class="hgi-stroke hgi-paint-board"></i> design-system.md · 中南主色 #3087CC</span>
+    <span class="hero-badge"><i class="hgi-stroke hgi-smart-phone-01"></i> 学生端 5 页</span>
+    <span class="hero-badge"><i class="hgi-stroke hgi-dashboard-square-01"></i> 后台 6 页</span>
+  </div>
+</div>
+<div class="container">
+  <div class="section-title"><i class="hgi-stroke hgi-checkmark-square-02"></i> 能力要点</div>
+  <div class="feature-box"><ul class="feature-list">
+    <li><i class="hgi-stroke hgi-tick-01"></i> 特长信息：两级级联（6 大类 / 58 项）+ 熟练程度</li>
+    <li><i class="hgi-stroke hgi-tick-01"></i> 特长子表可增删，每人 1~50 行</li>
+    <li><i class="hgi-stroke hgi-tick-01"></i> 服役经历登记：是否服役分支 + 兵种 / 时间 / 材料</li>
+    <li><i class="hgi-stroke hgi-tick-01"></i> 后台列表筛选、导出、详情查看</li>
+    <li><i class="hgi-stroke hgi-tick-01"></i> 环节办理情况新增两列状态</li>
+    <li><i class="hgi-stroke hgi-tick-01"></i> 特长信息统计（大类 / 熟练程度）</li>
+  </ul></div>
+
+  <div class="section-title"><i class="hgi-stroke hgi-menu-01"></i> 模块入口</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-head">
+        <div class="module-icon mi-1"><i class="hgi-stroke hgi-music-note-01"></i></div>
+        <div><h3>学生端 · 特长信息</h3><p>预报到环节 · 选填 · 文艺特长采集</p></div>
+      </div>
+      <div class="module-links">
+        <a href="mobile/home-demo.html"><i class="hgi-stroke hgi-home-01"></i> 首页入口示意 mobile/home-demo.html</a>
+        <a href="mobile/talent-collect.html"><i class="hgi-stroke hgi-edit-02"></i> 采集表单 mobile/talent-collect.html</a>
+        <a href="mobile/talent-success.html"><i class="hgi-stroke hgi-checkmark-circle-02"></i> 提交成功 mobile/talent-success.html</a>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-head">
+        <div class="module-icon mi-2"><i class="hgi-stroke hgi-shield-01"></i></div>
+        <div><h3>学生端 · 服役经历登记</h3><p>预报到环节 · 必填 · 服役经历采集</p></div>
+      </div>
+      <div class="module-links">
+        <a href="mobile/home-demo.html"><i class="hgi-stroke hgi-home-01"></i> 首页入口示意 mobile/home-demo.html</a>
+        <a href="mobile/service-register.html"><i class="hgi-stroke hgi-edit-02"></i> 登记表单 mobile/service-register.html</a>
+        <a href="mobile/service-success.html"><i class="hgi-stroke hgi-checkmark-circle-02"></i> 提交成功 mobile/service-success.html</a>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-head">
+        <div class="module-icon mi-3"><i class="hgi-stroke hgi-dashboard-square-01"></i></div>
+        <div><h3>后台 · 数字迎新</h3><p>新生信息采集 · 列表 / 详情 / 统计</p></div>
+      </div>
+      <div class="module-links">
+        <a href="admin/talent-list.html"><i class="hgi-stroke hgi-table"></i> 特长信息列表</a>
+        <a href="admin/talent-detail.html"><i class="hgi-stroke hgi-view"></i> 特长信息详情</a>
+        <a href="admin/talent-stats.html"><i class="hgi-stroke hgi-pie-chart"></i> 特长信息统计</a>
+        <a href="admin/service-list.html"><i class="hgi-stroke hgi-table"></i> 服役经历登记列表</a>
+        <a href="admin/service-detail.html"><i class="hgi-stroke hgi-view"></i> 服役经历登记详情</a>
+        <a href="admin/status.html"><i class="hgi-stroke hgi-task-01"></i> 环节办理情况</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

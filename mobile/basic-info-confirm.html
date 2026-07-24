@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>基本信息采集 · 中南迎新</title>
+<link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+<style>
+/* tokens.css + mobile.css (内联) */
+:root {
+  --primary: #3087CC;
+  --primary-light: #E3F1F9;
+  --primary-dark: #006DAD;
+  --primary-border: #BADEF3;
+  --brand-red: #DF2027;
+  --success: #1BB975;
+  --success-bg: #E8FCF4;
+  --success-border: #A7F3D0;
+  --warning: #F29100;
+  --warning-bg: #FFF5E5;
+  --warning-border: #FFE0B3;
+  --danger: #DF2027;
+  --danger-bg: #FCE8EA;
+  --danger-border: #F6BCBE;
+  --text: #3C444F;
+  --text-2: #696F7D;
+  --text-3: #9096A2;
+  --placeholder: #ABB0BA;
+  --border: #C8CAD1;
+  --border-light: #ECEFF4;
+  --bg: #F5F7FA;
+  --card: #FFFFFF;
+  --table-header-bg: #E3F1F9;
+  --font-family: 'OPPOSans', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --sidebar-width: 240px;
+  --header-height: 56px;
+  --transition: 150ms ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-family);
+  background: #E8EEF5;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea { font-family: inherit; }
+
+.phone-wrap {
+  max-width: 390px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #F5F8FC;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0,0,0,.08);
+}
+
+/* Status bar mock */
+.status-bar {
+  height: 44px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: transparent;
+}
+.status-bar .icons { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+
+/* Header */
+.m-header {
+  background: linear-gradient(180deg, #4BA3E0 0%, #3087CC 60%, #2A7AB8 100%);
+  color: #fff;
+  padding-bottom: 12px;
+}
+.m-header-bar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  position: relative;
+}
+.m-header-bar .back {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #fff;
+}
+.m-header-bar .title {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-size: 17px; font-weight: 600;
+}
+.m-capsule {
+  display: flex; align-items: center; gap: 0;
+  background: rgba(255,255,255,.25);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,.35);
+}
+.m-capsule span { width: 1px; height: 14px; background: rgba(255,255,255,.5); margin: 0 8px; }
+
+/* Content */
+.m-body {
+  padding: 12px 16px 100px;
+  margin-top: -4px;
+}
+
+.m-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.m-card::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, transparent 50%, #E3F1F9 50%);
+  border-radius: 0 12px 0 0;
+  pointer-events: none;
+}
+.m-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #F1F2F3;
+  gap: 12px;
+}
+.field-row:last-child { border-bottom: none; }
+.field-row .label {
+  color: var(--text-3);
+  font-size: 14px;
+  flex-shrink: 0;
+  min-width: 88px;
+}
+.field-row .label .req { color: var(--danger); margin-right: 2px; }
+.field-row .value {
+  color: var(--text);
+  font-size: 14px;
+  text-align: right;
+  flex: 1;
+  word-break: break-all;
+}
+.field-row .value.muted { color: var(--placeholder); }
+.field-row input,
+.field-row select,
+.field-row textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 14px;
+  color: var(--text);
+  background: transparent;
+}
+.field-row textarea { text-align: left; min-height: 72px; resize: none; }
+.field-row input::placeholder,
+.field-row textarea::placeholder { color: var(--placeholder); }
+
+.field-block {
+  padding: 10px 0;
+  border-bottom: 1px solid #F1F2F3;
+}
+.field-block:last-child { border-bottom: none; }
+.field-block .label {
+  color: var(--text-3);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.field-block .label .req { color: var(--danger); margin-right: 2px; }
+
+/* Radio / chips */
+.radio-group { display: flex; gap: 20px; flex-wrap: wrap; }
+.radio-item {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; font-size: 14px; color: var(--text);
+}
+.radio-item .dot {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.radio-item.active .dot {
+  border-color: var(--primary);
+}
+.radio-item.active .dot::after {
+  content: '';
+  width: 10px; height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+.chip-group { display: flex; flex-direction: column; gap: 8px; }
+.chip-option {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.chip-option.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.chip-option .dot {
+  width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+  border: 1.5px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.chip-option.active .dot { border-color: var(--primary); }
+.chip-option.active .dot::after {
+  content: ''; width: 10px; height: 10px;
+  background: var(--primary); border-radius: 50%;
+}
+.chip-option .t { font-size: 14px; font-weight: 600; color: var(--text); }
+.chip-option .d { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+/* Tags */
+.tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 500;
+}
+.tag-req { background: #FCE8EA; color: #DF2027; }
+.tag-opt { background: #E3F1F9; color: #3087CC; }
+.tag-online { background: #E3F1F9; color: #3087CC; }
+.tag-ok { background: #E8FCF4; color: #1BB975; }
+.tag-lv1 { background: #E3F1F9; color: #3087CC; }
+.tag-lv2 { background: #FFF5E5; color: #F29100; }
+.tag-lv3 { background: #E8FCF4; color: #1BB975; }
+
+/* Talent list items */
+.talent-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px;
+  background: #F8FBFE;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border-light);
+}
+.talent-item .info { flex: 1; min-width: 0; }
+.talent-item .name { font-size: 14px; font-weight: 600; color: var(--text); }
+.talent-item .meta { font-size: 12px; color: var(--text-3); margin-top: 4px; display: flex; gap: 6px; align-items: center; }
+.talent-item .del {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--danger); font-size: 16px; cursor: pointer;
+  border: none; background: transparent;
+}
+
+.btn-add {
+  width: 100%;
+  height: 44px;
+  border: 1px dashed var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-add:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Footer bar */
+.m-footer {
+  position: fixed;
+  left: 50%; transform: translateX(-50%);
+  bottom: 0;
+  width: 100%; max-width: 390px;
+  background: #fff;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 16px));
+  box-shadow: var(--shadow-top);
+  display: flex; gap: 12px;
+  z-index: 50;
+}
+.btn {
+  flex: 1; height: 44px;
+  border-radius: 8px;
+  font-size: 16px; font-weight: 600;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-primary {
+  background: linear-gradient(90deg, #3087CC, #006DAD);
+  color: #fff;
+}
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+.btn-ghost {
+  background: #fff;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.btn-outline-danger {
+  background: #fff;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+/* Sheet / modal */
+.sheet-mask {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 100;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+}
+.sheet-mask.show { display: flex; }
+.sheet {
+  width: 100%; max-width: 390px;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  max-height: 85vh;
+  display: flex; flex-direction: column;
+  animation: slideUp .25s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.sheet-head {
+  padding: 16px 16px 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+}
+.sheet-head h3 { font-size: 16px; font-weight: 700; }
+.sheet-head .close {
+  width: 32px; height: 32px; border: none; background: transparent;
+  font-size: 18px; color: var(--text-3); cursor: pointer;
+}
+.sheet-body { padding: 16px; overflow-y: auto; flex: 1; }
+.sheet-foot {
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 12px));
+  display: flex; gap: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Cascade picker */
+.cascade-search {
+  width: 100%; height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  outline: none;
+}
+.cascade-search:focus { border-color: var(--primary); }
+.cascade-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 220px;
+  max-height: 280px;
+}
+.cascade-col {
+  overflow-y: auto;
+  max-height: 280px;
+}
+.cascade-col:first-child { border-right: 1px solid var(--border-light); background: #F8FBFE; }
+.cascade-opt {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text-2);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cascade-opt:hover { background: rgba(48,135,204,.06); }
+.cascade-opt.active {
+  color: var(--primary);
+  font-weight: 600;
+  background: #fff;
+}
+.cascade-opt .arrow { font-size: 12px; color: var(--text-3); }
+
+/* Upload */
+.upload-box {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-3);
+  cursor: pointer;
+  background: #FAFBFC;
+}
+.upload-box i { font-size: 28px; color: var(--primary); display: block; margin-bottom: 8px; }
+.upload-preview {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
+}
+.upload-preview .thumb {
+  width: 72px; height: 72px;
+  border-radius: 6px;
+  background: var(--primary-light);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 12px;
+  position: relative;
+  border: 1px solid var(--primary-border);
+}
+.upload-preview .thumb .rm {
+  position: absolute; top: -6px; right: -6px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--danger); color: #fff;
+  font-size: 11px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Success page */
+.success-wrap {
+  text-align: center;
+  padding: 80px 32px 40px;
+}
+.success-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  color: var(--success);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.success-wrap h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.success-wrap p { font-size: 14px; color: var(--text-3); margin-bottom: 32px; }
+
+/* Home demo */
+.home-banner {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(160deg, #5BB0E8 0%, #3087CC 50%, #1E6BA8 100%);
+  overflow: hidden;
+}
+.home-banner .banner-title {
+  position: absolute;
+  left: 20px; top: 70px;
+  color: #fff;
+}
+.home-banner .banner-title h1 {
+  font-size: 28px; font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.home-banner .banner-title p { font-size: 12px; opacity: .85; margin-top: 4px; }
+.home-banner .msg-btn {
+  position: absolute; right: 16px; top: 100px;
+  background: #FF6B8A; color: #fff;
+  padding: 6px 12px; border-radius: 16px;
+  font-size: 12px; font-weight: 600;
+}
+.home-banner .notice {
+  position: absolute; left: 12px; right: 12px; bottom: 12px;
+  background: rgba(0,0,0,.45);
+  color: #fff; font-size: 12px;
+  padding: 8px 12px; border-radius: 20px;
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap; overflow: hidden;
+}
+
+.quick-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  padding: 0 16px; margin-top: -28px; position: relative; z-index: 2;
+}
+.quick-card {
+  border-radius: 14px; padding: 16px;
+  color: #fff; min-height: 88px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+.quick-card.pink { background: linear-gradient(135deg, #FF8BA7, #FF5C8A); }
+.quick-card.blue { background: linear-gradient(135deg, #5BB0E8, #3087CC); }
+.quick-card h3 { font-size: 16px; font-weight: 700; }
+.quick-card p { font-size: 11px; opacity: .9; margin-top: 4px; }
+
+.progress-sec { padding: 20px 16px 8px; }
+.progress-sec .ph {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.progress-sec .ph h3 { font-size: 16px; font-weight: 700; }
+.progress-sec .ph .cnt { font-size: 13px; color: var(--primary); font-weight: 600; }
+.progress-bar {
+  height: 8px; background: #E8EEF5; border-radius: 10px; overflow: hidden;
+}
+.progress-bar .fill {
+  height: 100%; width: 28%;
+  background: linear-gradient(90deg, #3087CC, #5BB0E8);
+  border-radius: 10px;
+}
+
+.task-list { padding: 8px 16px 100px; }
+.task-card {
+  display: flex; align-items: center; gap: 12px;
+  background: #fff; border-radius: 12px;
+  padding: 14px; margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.task-card .ico {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #fff; flex-shrink: 0;
+}
+.task-card .body { flex: 1; min-width: 0; }
+.task-card .body .t {
+  font-size: 15px; font-weight: 700; color: #2A6BA8;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.task-card .body .d { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.task-card .arrow { color: var(--text-3); font-size: 16px; }
+.task-card .done { color: var(--success); font-size: 22px; }
+
+.tabbar {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: 0; width: 100%; max-width: 390px;
+  height: 60px;
+  background: #3087CC;
+  display: flex; align-items: center;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  z-index: 40;
+}
+.tabbar a {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 2px;
+  color: rgba(255,255,255,.7); font-size: 11px;
+}
+.tabbar a.active { color: #fff; }
+.tabbar a i { font-size: 20px; }
+.tabbar a.active .dot-wrap {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  margin-top: -8px;
+}
+
+.hint-text {
+  font-size: 12px; color: var(--warning); margin: 8px 0 0;
+}
+.empty-tip {
+  text-align: center; padding: 24px; color: var(--text-3); font-size: 13px;
+}
+
+.select-trigger {
+  flex: 1; text-align: right; color: var(--text);
+  display: flex; align-items: center; justify-content: flex-end; gap: 4px;
+  cursor: pointer;
+}
+.select-trigger.placeholder { color: var(--placeholder); }
+.select-trigger i { color: var(--text-3); font-size: 14px; }
+
+.mini-banner {
+  background: linear-gradient(135deg, #C62828, #E53935 50%, #FF7043);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #fff;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.mini-banner .star { font-size: 28px; }
+.mini-banner h4 { font-size: 15px; font-weight: 700; }
+.mini-banner p { font-size: 11px; opacity: .9; margin-top: 2px; }
+
+.hidden { display: none !important; }
+
+
+/* ===== 基本信息确认合并页 追加样式 ===== */
+.sub-add{color:var(--primary);font-size:13px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;}
+.relation-item,.member-card,.edu-block{background:#F8FBFE;border:1px solid var(--border-light);border-radius:8px;padding:12px;margin-bottom:10px;position:relative;}
+.relation-item .ri-head,.member-card .mc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.relation-item .ri-name,.member-card .mc-name{font-weight:600;display:flex;align-items:center;gap:8px;}
+.rel-tag{background:var(--primary-light);color:var(--primary);font-size:11px;padding:1px 8px;border-radius:4px;}
+.relation-item .ri-sub{font-size:13px;color:var(--text-3);}
+.member-card .mc-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;gap:12px;}
+.member-card .mc-row .k{color:var(--text-3);flex-shrink:0;}
+.member-card .mc-row .v{color:var(--text);text-align:right;}
+.del-btn{border:none;background:transparent;color:var(--danger);font-size:16px;cursor:pointer;}
+.count-ta{position:relative;}
+.count-ta textarea{width:100%;min-height:88px;border:1px solid var(--border);border-radius:8px;padding:10px 12px 24px;font-size:14px;font-family:inherit;resize:vertical;outline:none;line-height:1.6;color:var(--text);}
+.count-ta textarea:focus{border-color:var(--primary);}
+.count-ta .cnt{position:absolute;right:10px;bottom:8px;font-size:12px;color:var(--text-3);}
+.agree-row{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text-2);padding:6px 4px;}
+.agree-row input{margin-top:2px;flex-shrink:0;}
+.agree-row a{color:var(--primary);}
+.edu-block .del-btn{position:absolute;right:6px;top:6px;}
+.notice-bar{margin:12px 16px 0;background:var(--warning-bg);border:1px solid var(--warning-border);color:var(--warning);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;gap:8px;align-items:flex-start;}
+</style>
+</head>
+<body>
+<div class="phone-wrap">
+  <div class="m-header">
+    <div class="status-bar"><span>9:41</span><div class="icons"><i class="hgi-stroke hgi-signal-full-01"></i><i class="hgi-stroke hgi-wifi-01"></i><i class="hgi-stroke hgi-battery-full"></i></div></div>
+    <div class="m-header-bar">
+      <a class="back" href="home-demo.html"><i class="hgi-stroke hgi-arrow-left-01"></i></a>
+      <div class="title">基本信息采集</div>
+      <div class="m-capsule"><i class="hgi-stroke hgi-more-horizontal"></i><span></span><i class="hgi-stroke hgi-cancel-01"></i></div>
+    </div>
+  </div>  <div class="m-body">
+    <div class="m-card">
+      <div class="m-card-title">基本信息</div>
+      <div class="field-row"><span class="label"><span class="req">*</span>学生姓名</span><span class="value">张三</span></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>曾用名</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>姓名拼音</span><input type="text" value="ZHANGSAN" /></div>
+      <div class="field-block"><div class="label"><span class="req">*</span>性别</div>
+        <div class="radio-group"><div class="radio-item active" onclick="pickRadio(this)"><div class="dot"></div>男</div><div class="radio-item" onclick="pickRadio(this)"><div class="dot"></div>女</div></div>
+      </div>
+      <div class="field-row"><span class="label"><span class="req">*</span>身份证号</span><input type="text" value="433026200009096789" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>发证机关</span><input type="text" placeholder="请输入身份证背面签发机关" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>手机号码</span><input type="text" value="18899998888" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>微信号</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>QQ号</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>出生日期</span><input type="date" value="2000-09-09" /></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>民族</span><div class="select-trigger" onclick="openPicker('f_nation', OPT.nation)"><span id="f_nation">汉族</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>籍贯</span><div class="select-trigger placeholder" onclick="openPicker('f_native', OPT.regionx)"><span id="f_native">请选择省市（县）</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label"><span class="req">*</span>政治面貌</span><div class="select-trigger placeholder" onclick="openPicker('f_politics', OPT.politics)"><span id="f_politics">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">何时入团</span><div class="select-trigger placeholder" onclick="openPicker('f_league', OPT.ym)"><span id="f_league">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">何时入党</span><div class="select-trigger placeholder" onclick="openPicker('f_party', OPT.ym)"><span id="f_party">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">毕业学校</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label">毕业学校地址</span><div class="select-trigger placeholder" onclick="openPicker('f_schooladdr', OPT.regionx)"><span id="f_schooladdr">请选择省市区</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">毕业学校详细地址</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label">毕业学校邮编</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label">家庭住址</span><div class="select-trigger placeholder" onclick="openPicker('f_homeaddr', OPT.regionx)"><span id="f_homeaddr">请选择省市区</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">家庭详细地址</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-row"><span class="label">邮编</span><input type="text" placeholder="请输入" /></div>
+      <div class="field-block"><div class="label"><span class="req">*</span>是否有宗教信仰</div>
+        <div class="radio-group"><div class="radio-item active" onclick="pickRadio(this)"><div class="dot"></div>是</div><div class="radio-item" onclick="pickRadio(this)"><div class="dot"></div>否</div></div>
+      </div>
+      <div class="field-row"><span class="label"><span class="req">*</span>宗教信仰</span><div class="select-trigger placeholder" onclick="openPicker('f_religion', OPT.religion)"><span id="f_religion">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">其他宗教</span><input type="text" placeholder="请注明" /></div>
+      <div class="field-block"><div class="label"><span class="req">*</span>身体是否健康</div>
+        <div class="radio-group"><div class="radio-item" onclick="pickRadio(this)"><div class="dot"></div>是</div><div class="radio-item active" onclick="pickRadio(this)"><div class="dot"></div>否</div></div>
+      </div>
+      <div class="field-row"><span class="label"><span class="req">*</span>健康状况</span><div class="select-trigger" onclick="openPicker('f_health', OPT.health)"><span id="f_health">其他</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">其他异常情况</span><input type="text" placeholder="请注明" /></div>
+      <div class="field-block"><div class="label"><span class="req">*</span>可否享受火车票优惠</div>
+        <div class="radio-group"><div class="radio-item active" onclick="pickRadio(this)"><div class="dot"></div>是</div><div class="radio-item" onclick="pickRadio(this)"><div class="dot"></div>否</div></div>
+      </div>
+      <div class="field-row"><span class="label"><span class="req">*</span>乘车区间(从学校-家庭)</span><div class="select-trigger placeholder" onclick="openPicker('f_train', OPT.train)"><span id="f_train">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+      <div class="field-row"><span class="label">到站信息</span><input type="text" value="湘浦南" /></div>
+      <div class="field-block"><div class="label"><span class="req">*</span>照片</div>
+        <div class="upload-box" onclick="togglePhoto(this)"><i class="hgi-stroke hgi-add-01"></i>推荐上传近期 20M 以内 PNG、JPG、GIF 一寸免冠照片，文件名不能包含特殊字符及空格</div>
+      </div>
+    </div>
+    <div class="m-card">
+      <div class="m-card-title">考生信息</div>
+      <div class="field-row"><span class="label">考生号</span><span class="value">U0384803</span></div>
+      <div class="field-row"><span class="label">考生来源</span><span class="value">本科</span></div>
+      <div class="field-row"><span class="label">考生类别</span><span class="value">四年制</span></div>
+    </div>
+    <div class="m-card">
+      <div class="m-card-title">学籍信息</div>
+      <div class="field-row"><span class="label">学号</span><span class="value">234567589</span></div>
+      <div class="field-row"><span class="label">学生类别</span><span class="value">本科</span></div>
+      <div class="field-row"><span class="label">学制</span><span class="value">四年制</span></div>
+      <div class="field-row"><span class="label">学院</span><span class="value">计算机学院</span></div>
+      <div class="field-row"><span class="label">专业</span><span class="value">互联网专业</span></div>
+      <div class="field-row"><span class="label">班级</span><span class="value">计算机302</span></div>
+    </div>
+    <div class="m-card">
+      <div class="m-card-title"><span>家长信息</span><span class="sub-add" onclick="openParentSheet()"><i class="hgi-stroke hgi-add-01"></i> 添加</span></div>
+      <div id="parentList"></div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-card-title"><span>校友信息</span><span class="sub-add" onclick="openAlumniSheet()"><i class="hgi-stroke hgi-add-01"></i> 添加</span></div>
+      <div class="field-block"><div class="label">亲戚是否为中南毕业</div>
+        <div class="radio-group"><div class="radio-item active" onclick="setAlumniCsu(true,this)"><div class="dot"></div>是</div><div class="radio-item" onclick="setAlumniCsu(false,this)"><div class="dot"></div>否</div></div>
+      </div>
+      <div id="alumniList"></div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-card-title"><span>家庭成员和主要社会关系</span><span class="sub-add" onclick="openFamilySheet()"><i class="hgi-stroke hgi-add-01"></i> 添加</span></div>
+      <div id="familyList"></div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-card-title"><span>学历及社会经历</span><span class="sub-add" onclick="addEdu()"><i class="hgi-stroke hgi-add-01"></i> 添加</span></div>
+      <div id="eduList"></div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-card-title">家庭经济状况</div>
+      <div class="field-block"><div class="label">家庭经济状况(现在经济情况及主要经济来源)</div>
+        <div class="count-ta"><textarea maxlength="1000" oninput="cnt(this)" placeholder="请输入..."></textarea><span class="cnt">0/1000</span></div>
+      </div>
+    </div>
+    <div class="m-card">
+      <div class="m-card-title">
+        <span>特长信息 <span style="font-size:12px;font-weight:400;color:var(--text-3)">（必填 · 1~50 条）</span></span>
+        <span id="countBadge" class="tag tag-opt">0 条</span>
+      </div>
+      <div id="talentList"></div>
+      <div id="emptyTip" class="empty-tip">暂无特长记录，请点击下方按钮添加</div>
+      <button type="button" class="btn-add" id="btnAdd" onclick="openSheet()"><i class="hgi-stroke hgi-add-01"></i> 添加一条特长</button>
+      <p class="hint-text">特长信息为必填，至少填写 1 条；类别选“其他”时请填写具体名称。</p>
+    </div>
+    <div style="padding:8px 4px 4px;font-size:12px;color:var(--warning)">请仔细核对学生信息，确认无误后提交</div>
+    <label class="agree-row"><input type="checkbox" id="agree1" checked /> <span>我已阅读并同意 <a href="javascript:;">《中南大学本科生学籍管理规定》</a></span></label>
+    <label class="agree-row"><input type="checkbox" id="agree2" /> <span>我已阅读并同意 <a href="javascript:;">《中南大知识产权保护管理办法》</a></span></label>
+  </div>
+  <div class="m-footer">
+    <button type="button" class="btn btn-primary" onclick="submitForm()" style="flex:1">确认提交</button>
+  </div>
+</div>
+
+  <div class="sheet-mask" id="pickerMask">
+    <div class="sheet"><div class="sheet-head"><h3>请选择</h3><button type="button" class="close" onclick="closePicker()"><i class="hgi-stroke hgi-cancel-01"></i></button></div><div class="sheet-body" id="pickerList"></div></div>
+  </div>
+  <div class="sheet-mask" id="parentMask">
+    <div class="sheet"><div class="sheet-head"><h3>添加家长信息</h3><button type="button" class="close" onclick="closeParentSheet()"><i class="hgi-stroke hgi-cancel-01"></i></button></div>
+      <div class="sheet-body">
+        <div class="field-row"><span class="label"><span class="req">*</span>亲属关系</span><div class="select-trigger placeholder" onclick="openPicker('pRel', OPT.relative)"><span id="pRel">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>家长姓名</span><input type="text" id="pName" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>联系方式</span><input type="text" id="pPhone" placeholder="请输入" /></div>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn btn-ghost" onclick="closeParentSheet()">取消</button><button type="button" class="btn btn-primary" onclick="confirmParent()">确认</button></div>
+    </div>
+  </div>
+  <div class="sheet-mask" id="alumniMask">
+    <div class="sheet"><div class="sheet-head"><h3>添加校友信息</h3><button type="button" class="close" onclick="closeAlumniSheet()"><i class="hgi-stroke hgi-cancel-01"></i></button></div>
+      <div class="sheet-body">
+        <div class="field-row"><span class="label"><span class="req">*</span>亲属关系</span><div class="select-trigger placeholder" onclick="openPicker('aRel', OPT.relative)"><span id="aRel">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>家长姓名</span><input type="text" id="aName" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>毕业年份</span><div class="select-trigger placeholder" onclick="openPicker('aYear', OPT.year)"><span id="aYear">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>毕业专业</span><input type="text" id="aMajor" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>联系方式</span><input type="text" id="aPhone" placeholder="请输入" /></div>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn btn-ghost" onclick="closeAlumniSheet()">取消</button><button type="button" class="btn btn-primary" onclick="confirmAlumni()">确认</button></div>
+    </div>
+  </div>
+  <div class="sheet-mask" id="familyMask">
+    <div class="sheet"><div class="sheet-head"><h3>新增家庭成员</h3><button type="button" class="close" onclick="closeFamilySheet()"><i class="hgi-stroke hgi-cancel-01"></i></button></div>
+      <div class="sheet-body">
+        <div class="field-row"><span class="label"><span class="req">*</span>姓名</span><input type="text" id="fName" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>称呼</span><div class="select-trigger placeholder" onclick="openPicker('fRel', OPT.appellation)"><span id="fRel">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>年龄</span><input type="text" id="fAge" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label"><span class="req">*</span>手机号码</span><input type="text" id="fPhone" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label">政治面貌</span><input type="text" id="fPolitics" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label">工作（学习）单位</span><input type="text" id="fUnit" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label">职业</span><input type="text" id="fJob" placeholder="请输入" /></div>
+        <div class="field-row"><span class="label">现在何处、任何工作</span><input type="text" id="fNow" placeholder="请输入" /></div>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn btn-ghost" onclick="closeFamilySheet()">取消</button><button type="button" class="btn btn-primary" onclick="confirmFamily()">确认</button></div>
+    </div>
+  </div>
+  <div class="sheet-mask" id="sheetMask">
+    <div class="sheet"><div class="sheet-head"><h3 id="sheetTitle">添加一条特长</h3><button type="button" class="close" onclick="closeSheet()"><i class="hgi-stroke hgi-cancel-01"></i></button></div>
+      <div class="sheet-body">
+        <div class="field-block"><div class="label"><span class="req">*</span>特长类别</div>
+          <input class="cascade-search" id="catSearch" placeholder="请输入关键词搜索" oninput="filterCats()" />
+          <div class="cascade-cols"><div class="cascade-col" id="level1List"></div><div class="cascade-col" id="level2List"></div></div>
+          <p id="catHint" style="font-size:12px;color:var(--danger);margin-top:8px;display:none">此题为必填，请逐级选至末级</p>
+          <p id="catSelected" style="font-size:13px;color:var(--primary);margin-top:8px;display:none"></p>
+        </div>
+        <div class="field-block hidden" id="customBlock"><div class="label"><span class="req">*</span>具体特长（其他）</div>
+          <input class="cascade-search" id="customInput" placeholder="选择“其他”时请填写具体特长名称" style="margin-bottom:0" maxlength="30" />
+        </div>
+        <div class="field-block"><div class="label"><span class="req">*</span>熟练程度</div><div class="chip-group" id="profGroup"></div></div>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn btn-ghost" onclick="closeSheet()">取消</button><button type="button" class="btn btn-primary" onclick="confirmSheet()">确认</button></div>
+    </div>
+  </div>
+
+<script src="../assets/talent-dict.js"></script>
+<script>
+
+var OPT={
+ nation:['汉族','壮族','满族','回族','苗族','维吾尔族','土家族','彝族','蒙古族','藏族','其他'],
+ regionx:['湖南省 长沙市 岳麓区','湖南省 长沙市 天心区','广东省 广州市 天河区','北京市 海淀区','浙江省 杭州市 西湖区','其他'],
+ politics:['群众','共青团员','中共党员','中共预备党员','各民主党派','无党派人士'],
+ ym:['2015.09','2016.09','2017.09','2018.09','2019.09','2020.09'],
+ religion:['佛教','道教','伊斯兰教','基督教','天主教','其他'],
+ health:['健康或良好','一般或较弱','有慢性病','其他'],
+ train:['长沙','北京','上海','广州','武汉','其他'],
+ year:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+ relative:['父亲','母亲','爷爷','奶奶','外公','外婆','兄','弟','姐','妹','其他'],
+ appellation:['父亲','母亲','兄','弟','姐','妹','祖父','祖母','外祖父','外祖母','其他'],
+ period:['2015.09-2018.06','2018.09-2021.06','2019.09-2023.06','2021.09-2024.06','其他']
+};
+var pickerTarget=null;
+function openPicker(id,opts){pickerTarget=id;document.getElementById('pickerList').innerHTML=opts.map(function(o){return '<div class="cascade-opt" onclick="pickOption(\'' + o + '\')">' + o + '</div>';}).join('');document.getElementById('pickerMask').classList.add('show');}
+function closePicker(){document.getElementById('pickerMask').classList.remove('show');}
+function pickOption(v){var el=document.getElementById(pickerTarget);el.textContent=v;el.classList.remove('placeholder');closePicker();}
+function pickRadio(el){var a=el.parentNode.querySelectorAll('.radio-item');for(var i=0;i<a.length;i++){a[i].classList.remove('active');}el.classList.add('active');}
+function cnt(el){var c=el.parentNode.querySelector('.cnt');var m=el.getAttribute('maxlength')||'1000';c.textContent=el.value.length+'/'+m;}
+function togglePhoto(el){if(el.dataset.on){el.dataset.on='';el.innerHTML='<i class="hgi-stroke hgi-add-01"></i>推荐上传近期 20M 以内 PNG、JPG、GIF 一寸免冠照片，文件名不能包含特殊字符及空格';}else{el.dataset.on='1';el.innerHTML='<i class="hgi-stroke hgi-checkmark-circle-02" style="color:var(--success)"></i> 照片已上传（示例）';}}
+
+var parents=[{name:'张云',rel:'父亲',phone:'17838000323'}];
+function renderParents(){document.getElementById('parentList').innerHTML=parents.map(function(p,i){return '<div class="relation-item"><div class="ri-head"><div class="ri-name">'+p.name+' <span class="rel-tag">'+p.rel+'</span></div><button class="del-btn" onclick="removeParent('+i+')"><i class="hgi-stroke hgi-delete-02"></i></button></div><div class="ri-sub">'+p.phone+'</div></div>';}).join('')||'<div class="empty-tip">暂无家长信息，请点击右上角添加</div>';}
+function removeParent(i){if(confirm('删除该家长信息？')){parents.splice(i,1);renderParents();}}
+function openParentSheet(){document.getElementById('pName').value='';document.getElementById('pPhone').value='';var t=document.getElementById('pRel');t.textContent='请选择';t.classList.add('placeholder');document.getElementById('parentMask').classList.add('show');}
+function closeParentSheet(){document.getElementById('parentMask').classList.remove('show');}
+function confirmParent(){var rel=document.getElementById('pRel').textContent;var name=document.getElementById('pName').value.trim();var phone=document.getElementById('pPhone').value.trim();if(rel==='请选择'||!name||!phone){alert('请填写完整家长信息');return;}parents.push({name:name,rel:rel,phone:phone});closeParentSheet();renderParents();}
+
+var alumni=[{name:'张云',rel:'父亲',grade:'2018级',college:'计算机学院',phone:'17838000323'}];
+function setAlumniCsu(v,el){pickRadio(el);document.getElementById('alumniList').style.display=v?'':'none';}
+function renderAlumni(){document.getElementById('alumniList').innerHTML=alumni.map(function(a,i){return '<div class="relation-item"><div class="ri-head"><div class="ri-name">'+a.name+' <span class="rel-tag">'+a.rel+'</span></div><button class="del-btn" onclick="removeAlumnus('+i+')"><i class="hgi-stroke hgi-delete-02"></i></button></div><div class="ri-sub">'+a.grade+a.college+' · '+a.phone+'</div></div>';}).join('')||'<div class="empty-tip">暂无校友信息</div>';}
+function removeAlumnus(i){if(confirm('删除该校友信息？')){alumni.splice(i,1);renderAlumni();}}
+function openAlumniSheet(){['aName','aMajor','aPhone'].forEach(function(x){document.getElementById(x).value='';});['aRel','aYear'].forEach(function(x){var t=document.getElementById(x);t.textContent='请选择';t.classList.add('placeholder');});document.getElementById('alumniMask').classList.add('show');}
+function closeAlumniSheet(){document.getElementById('alumniMask').classList.remove('show');}
+function confirmAlumni(){var rel=document.getElementById('aRel').textContent;var name=document.getElementById('aName').value.trim();var year=document.getElementById('aYear').textContent;var major=document.getElementById('aMajor').value.trim();var phone=document.getElementById('aPhone').value.trim();if(rel==='请选择'||!name||year==='请选择'||!major||!phone){alert('请填写完整校友信息');return;}alumni.push({name:name,rel:rel,grade:year+'级',college:major,phone:phone});closeAlumniSheet();renderAlumni();}
+
+var families=[{name:'张云',rel:'父亲',age:'46',phone:'13112340000',politics:'团员',unit:'务农',job:'务农',now:'农村老家'}];
+function mrow(k,v){return v?'<div class="mc-row"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>':'';}
+function renderFamilies(){document.getElementById('familyList').innerHTML=families.map(function(f,i){return '<div class="member-card"><div class="mc-head"><div class="mc-name">'+f.name+' <span class="rel-tag">'+f.rel+'</span></div><button class="del-btn" onclick="removeFamily('+i+')"><i class="hgi-stroke hgi-delete-02"></i></button></div>'+mrow('年龄',f.age)+mrow('手机号码',f.phone)+mrow('政治面貌',f.politics)+mrow('工作（学习）单位',f.unit)+mrow('职业',f.job)+mrow('现在何处、任何工作',f.now)+'</div>';}).join('')||'<div class="empty-tip">暂无家庭成员</div>';}
+function removeFamily(i){if(confirm('删除该家庭成员？')){families.splice(i,1);renderFamilies();}}
+function openFamilySheet(){['fName','fAge','fPhone','fPolitics','fUnit','fJob','fNow'].forEach(function(x){document.getElementById(x).value='';});var t=document.getElementById('fRel');t.textContent='请选择';t.classList.add('placeholder');document.getElementById('familyMask').classList.add('show');}
+function closeFamilySheet(){document.getElementById('familyMask').classList.remove('show');}
+function confirmFamily(){var name=document.getElementById('fName').value.trim();var rel=document.getElementById('fRel').textContent;var age=document.getElementById('fAge').value.trim();var phone=document.getElementById('fPhone').value.trim();if(!name||rel==='请选择'||!age||!phone){alert('请填写姓名、称呼、年龄、手机号码');return;}families.push({name:name,rel:rel,age:age,phone:phone,politics:document.getElementById('fPolitics').value.trim(),unit:document.getElementById('fUnit').value.trim(),job:document.getElementById('fJob').value.trim(),now:document.getElementById('fNow').value.trim()});closeFamilySheet();renderFamilies();}
+
+var eduSeq=0;
+function addEdu(){eduSeq++;var id=eduSeq;var d=document.createElement('div');d.className='edu-block';d.id='edu'+id;d.innerHTML='<div class="field-row"><span class="label"><span class="req">*</span>起止时间</span><div class="select-trigger placeholder" onclick="openPicker(\'eduT'+id+'\', OPT.period)"><span id="eduT'+id+'">请选择</span><i class="hgi-stroke hgi-arrow-down-01"></i></div></div><div class="field-block"><div class="label"><span class="req">*</span>在何地、何学校、何单位工作或学习、任何职务</div><div class="count-ta"><textarea maxlength="1000" oninput="cnt(this)" placeholder="请输入..."></textarea><span class="cnt">0/1000</span></div></div><button class="del-btn" onclick="removeEdu('+id+')"><i class="hgi-stroke hgi-remove-circle"></i></button>';document.getElementById('eduList').appendChild(d);}
+function removeEdu(id){var e=document.getElementById('edu'+id);if(e){e.parentNode.removeChild(e);}}
+
+function submitForm(){if(!records.length){alert('请至少填写一条特长信息');return;}if(!document.getElementById('agree1').checked||!document.getElementById('agree2').checked){alert('请阅读并同意相关协议后再提交');return;}location.href='basic-info-success.html';}
+
+renderParents();renderAlumni();renderFamilies();addEdu();addEdu();
+
+
+var records = [
+  { l1: '声乐', l2: '民族', prof: '了解', custom: '' },
+  { l1: '舞蹈', l2: '其他', prof: '熟练', custom: '街舞' }
+];
+var editIndex = -1;
+var selL1 = '', selL2 = '', selProf = '';
+
+function lvTag(p) {
+  if (p === '精通') return 'tag-lv3';
+  if (p === '熟练') return 'tag-lv2';
+  return 'tag-lv1';
+}
+
+function catLabel(r) {
+  if (r.l2 === '其他' && r.custom) return r.l1 + ' / 其他（' + r.custom + '）';
+  return r.l1 + ' / ' + r.l2;
+}
+
+function syncCustomBlock() {
+  var block = document.getElementById('customBlock');
+  if (selL2 === '其他') {
+    block.classList.remove('hidden');
+  } else {
+    block.classList.add('hidden');
+    document.getElementById('customInput').value = '';
+  }
+}
+
+function renderList() {
+  var list = document.getElementById('talentList');
+  var empty = document.getElementById('emptyTip');
+  var badge = document.getElementById('countBadge');
+  var btnAdd = document.getElementById('btnAdd');
+  badge.textContent = records.length + ' 条';
+  btnAdd.disabled = records.length >= 50;
+  if (!records.length) {
+    list.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = records.map(function (r, i) {
+    return '<div class="talent-item">' +
+      '<div class="info" onclick="editItem(' + i + ')">' +
+        '<div class="name">' + catLabel(r) + '</div>' +
+        '<div class="meta"><span class="tag ' + lvTag(r.prof) + '">' + r.prof + '</span></div>' +
+      '</div>' +
+      '<button type="button" class="del" onclick="removeItem(' + i + ')" title="删除"><i class="hgi-stroke hgi-delete-02"></i></button>' +
+    '</div>';
+  }).join('');
+}
+
+function openSheet(idx) {
+  editIndex = (typeof idx === 'number') ? idx : -1;
+  document.getElementById('sheetTitle').textContent = editIndex >= 0 ? '编辑特长' : '添加一条特长';
+  var customVal = '';
+  if (editIndex >= 0) {
+    selL1 = records[editIndex].l1;
+    selL2 = records[editIndex].l2;
+    selProf = records[editIndex].prof;
+    customVal = records[editIndex].custom || '';
+  } else {
+    selL1 = Object.keys(TALENT_DICT)[0];
+    selL2 = '';
+    selProf = '';
+  }
+  document.getElementById('catSearch').value = '';
+  document.getElementById('catHint').style.display = 'none';
+  renderLevel1();
+  renderLevel2();
+  renderProf();
+  updateCatSelected();
+  syncCustomBlock();
+  document.getElementById('customInput').value = customVal;
+  document.getElementById('sheetMask').classList.add('show');
+}
+
+function closeSheet() {
+  document.getElementById('sheetMask').classList.remove('show');
+}
+
+function editItem(i) { openSheet(i); }
+
+function removeItem(i) {
+  if (!confirm('确定删除该特长记录？')) return;
+  records.splice(i, 1);
+  renderList();
+}
+
+function renderLevel1() {
+  var kw = (document.getElementById('catSearch').value || '').trim();
+  var html = '';
+  Object.keys(TALENT_DICT).forEach(function (k) {
+    if (kw && k.indexOf(kw) < 0 && !TALENT_DICT[k].some(function (x) { return x.indexOf(kw) >= 0; })) return;
+    html += '<div class="cascade-opt' + (selL1 === k ? ' active' : '') + '" onclick="pickL1(\'' + k + '\')">' +
+      k + '<i class="hgi-stroke hgi-arrow-right-01 arrow"></i></div>';
+  });
+  document.getElementById('level1List').innerHTML = html || '<div class="empty-tip">无匹配类别</div>';
+}
+
+function renderLevel2() {
+  var kw = (document.getElementById('catSearch').value || '').trim();
+  var items = TALENT_DICT[selL1] || [];
+  var html = '';
+  items.forEach(function (k) {
+    if (kw && k.indexOf(kw) < 0 && selL1.indexOf(kw) < 0) return;
+    html += '<div class="cascade-opt' + (selL2 === k ? ' active' : '') + '" onclick="pickL2(\'' + k + '\')">' + k + '</div>';
+  });
+  document.getElementById('level2List').innerHTML = html || '<div class="empty-tip">请选择一级类别</div>';
+}
+
+function pickL1(k) {
+  selL1 = k;
+  selL2 = '';
+  renderLevel1();
+  renderLevel2();
+  updateCatSelected();
+  syncCustomBlock();
+}
+
+function pickL2(k) {
+  selL2 = k;
+  renderLevel2();
+  updateCatSelected();
+  syncCustomBlock();
+  document.getElementById('catHint').style.display = 'none';
+}
+
+function updateCatSelected() {
+  var el = document.getElementById('catSelected');
+  if (selL1 && selL2) {
+    el.style.display = '';
+    el.textContent = '已选：' + selL1 + ' / ' + selL2;
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+function filterCats() {
+  renderLevel1();
+  renderLevel2();
+}
+
+function renderProf() {
+  document.getElementById('profGroup').innerHTML = PROFICIENCY_OPTIONS.map(function (o) {
+    return '<div class="chip-option' + (selProf === o.value ? ' active' : '') + '" onclick="pickProf(\'' + o.value + '\')">' +
+      '<div class="dot"></div><div><div class="t">' + o.value + '</div><div class="d">' + o.desc + '</div></div></div>';
+  }).join('');
+}
+
+function pickProf(v) {
+  selProf = v;
+  renderProf();
+}
+
+function confirmSheet() {
+  if (!selL1 || !selL2) {
+    document.getElementById('catHint').style.display = '';
+    return;
+  }
+  var custom = (document.getElementById('customInput').value || '').trim();
+  if (selL2 === '其他' && !custom) {
+    alert('选择“其他”时请填写具体特长名称');
+    return;
+  }
+  if (!selProf) {
+    alert('请选择熟练程度');
+    return;
+  }
+  var item = { l1: selL1, l2: selL2, prof: selProf, custom: selL2 === '其他' ? custom : '' };
+  if (editIndex >= 0) records[editIndex] = item;
+  else {
+    if (records.length >= 50) { alert('最多可添加 50 条'); return; }
+    records.push(item);
+  }
+  closeSheet();
+  renderList();
+}
+
+
+renderList();
+
+</script>
+</body>
+</html>
